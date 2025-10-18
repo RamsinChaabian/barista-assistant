@@ -1,8 +1,10 @@
-import { motion, AnimatePresence } from 'framer-motion';
+// src/components/DrinkDetails.jsx
 
-// کامپوننت کوچک برای نمایش نوار مواد تشکیل‌دهنده
+import { motion, AnimatePresence } from 'framer-motion';
+import BrewingGuide from './BrewingGuide'; // کامپوننت راهنما را وارد کنید
+
+// کامپوننت نوار مواد
 const IngredientBar = ({ name, gram, color, maxGram }) => {
-  // محاسبه درصد عرض نوار بر اساس بیشترین مقدار گرم در نوشیدنی
   const percentage = maxGram > 0 ? (gram / maxGram) * 100 : 0;
   return (
     <div className="w-full mb-4">
@@ -24,11 +26,9 @@ const IngredientBar = ({ name, gram, color, maxGram }) => {
 };
 
 function DrinkDetails({ drink }) {
-  // پیدا کردن بیشترین مقدار گرم برای محاسبه درصد نوار پیشرفت
   const ingredients = drink ? Object.values(drink.ingredients) : [];
-  const maxGram = Math.max(...ingredients, 1); // جلوگیری از تقسیم بر صفر
+  const maxGram = Math.max(...ingredients, 1);
 
-  // تعریف رنگ‌ها برای هر ماده
   const ingredientColors = {
       coffee: '#6F4E37',
       milk: '#F5F5DC',
@@ -37,25 +37,24 @@ function DrinkDetails({ drink }) {
   };
 
   return (
-    // از mode="wait" استفاده می‌کنیم تا انیمیشن خروج تمام شود و سپس انیمیشن ورود شروع شود
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       {drink && (
         <motion.div
-          key={drink.id} // کلید برای AnimatePresence ضروری است تا بفهمد کامپوننت عوض شده
-          className="absolute inset-0 p-6 md:p-8 bg-black/20 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/10"
-          initial={{ opacity: 0, scale: 0.9 }}
+          key={drink.id}
+          className="absolute inset-0 p-4 md:p-6 bg-black/30 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/10"
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.4, ease: 'easeInOut' }}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center h-full">
+          {/* استفاده از گرید برای نمایش سه ستون در کنار هم */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center h-full">
             
-            {/* بخش توضیحات و مواد تشکیل دهنده */}
-            <div className="text-start order-2 md:order-1 h-full flex flex-col justify-center">
-              <h2 className="text-5xl font-bold mb-4 text-white">{drink.name}</h2>
-              <p className="text-warm-light leading-relaxed mb-8">{drink.description}</p>
+            {/* ستون اول: توضیحات و مواد تشکیل دهنده */}
+            <div className="text-start h-full flex flex-col justify-center">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-white">{drink.name}</h2>
+              <p className="text-warm-light leading-relaxed mb-6 text-sm lg:text-base">{drink.description}</p>
               
-              {/* نمایش داینامیک مواد بر اساس داده‌های JSON */}
               <div>
                 {Object.entries(drink.ingredients).map(([name, gram]) =>
                   gram > 0 && (
@@ -71,15 +70,15 @@ function DrinkDetails({ drink }) {
               </div>
             </div>
 
-            {/* بخش فنجان و انیمیشن بخار */}
-            <div className="relative flex justify-center items-center h-80 order-1 md:order-2">
+            {/* ستون دوم: فنجان اصلی و انیمیشن بخار */}
+            <div className="relative flex justify-center items-center h-80 order-first md:order-none">
               <motion.svg
-                className="absolute -top-10 w-24 h-24 opacity-60"
-                animate={{ y: [0, -20, 0], opacity: [0.6, 0.2, 0.6] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-10 w-24 h-24 opacity-50"
+                animate={{ y: [0, -20, 0], opacity: [0.5, 0.1, 0.5], scale: [1, 1.1, 1] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
-                <path d="M10 80 Q 20 50 30 80 T 50 80" stroke="#E0E0E0" fill="none" strokeWidth="2" />
-                <path d="M20 70 Q 30 40 40 70 T 60 70" stroke="#E0E0E0" fill="none" strokeWidth="2" />
+                <path d="M10 80 Q 20 50 30 80 T 50 80" stroke="#FFFFFF" fill="none" strokeWidth="2" />
+                <path d="M20 70 Q 30 40 40 70 T 60 70" stroke="#E0E0E0" fill="none" strokeWidth="1.5" />
               </motion.svg>
               
               <motion.div
@@ -97,6 +96,11 @@ function DrinkDetails({ drink }) {
                   transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
                 />
               </motion.div>
+            </div>
+
+            {/* ستون سوم: راهنمای ترکیب */}
+            <div className="h-full hidden md:block">
+              <BrewingGuide drink={drink} />
             </div>
           </div>
         </motion.div>
