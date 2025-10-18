@@ -1,0 +1,25 @@
+/* تعریف فونت وزیرمتن به صورت محلی */
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('./assets/fonts/Vazirmatn-FD-Regular.woff2') format('woff2');
+  font-weight: 400; /* وزن نرمال */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('./assets/fonts/Vazirmatn-FD-Bold.woff2') format('woff2');
+  font-weight: 700; /* وزن ضخیم (Bold) */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* بقیه کدهای CSS شما */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Vazirmatn', sans-serif;
+}
