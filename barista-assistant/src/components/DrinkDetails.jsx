@@ -133,24 +133,58 @@ function DrinkDetails({ drink }) {
               <BrewingGuide drink={drink} />
             </div>
 
-            <div className="relative flex justify-center items-center h-80 order-3 md:order-3 md:col-span-1">
+            <div className="relative flex flex-col justify-center items-center h-80 order-3 md:order-3 md:col-span-1">
               {drink.category === 'گرم' && <HotSteamAnimation />}
               {drink.category === 'سرد' && <ColdEffectAnimation />}
               
               <motion.div
-                className="w-48 h-40 rounded-b-full border-8 border-t-0"
-                style={{ borderColor: '#E0E0E0' }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
+                className="relative"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, type: 'spring', stiffness: 100 }}
               >
+                {/* Cup */}
                 <motion.div
-                  className="w-full h-full rounded-b-full"
-                  style={{ backgroundColor: drink.cupColor }}
-                  initial={{ height: 0 }}
-                  animate={{ height: '100%' }}
-                  transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-                />
+                  className="relative w-48 h-40 bg-white rounded-t-xl rounded-b-3xl shadow-lg"
+                  animate={{
+                    y: [0, -4, 0],
+                    rotate: [0, 1, -1, 0],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                >
+                  {/* Liquid */}
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 rounded-b-3xl"
+                    style={{
+                      backgroundColor: drink.cupColor,
+                      boxShadow: `inset 0 10px 20px rgba(0,0,0,0.2), 0 0 20px ${drink.cupColor}`,
+                    }}
+                    initial={{ height: 0 }}
+                    animate={{ height: '85%' }}
+                    transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
+                  />
+                  {/* Handle */}
+                  <motion.svg
+                    className="absolute -right-10 top-6 w-20 h-24"
+                    viewBox="0 0 100 100"
+                  >
+                    <motion.path
+                      d="M 50,20 C 80,20 80,80 50,80"
+                      stroke="white"
+                      strokeWidth="15"
+                      fill="none"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 1, delay: 0.8 }}
+                    />
+                  </motion.svg>
+                </motion.div>
+                {/* Saucer */}
+                <div className="absolute -bottom-2 -left-6 w-60 h-6 bg-white rounded-full shadow-inner" />
               </motion.div>
             </div>
 
