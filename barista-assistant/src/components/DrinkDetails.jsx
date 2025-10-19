@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import BrewingGuide from './BrewingGuide';
 
-// کامپوننت نوار نمایش مواد اولیه
+// (کامپوننت IngredientBar بدون تغییر باقی می‌ماند)
 const IngredientBar = ({ name, gram, color, maxGram }) => {
   const percentage = maxGram > 0 ? (gram / maxGram) * 100 : 0;
   
@@ -36,20 +36,78 @@ const IngredientBar = ({ name, gram, color, maxGram }) => {
   );
 };
 
-// کامپوننت انیمیشن بخار گرم با مسیرهای اصلاح‌شده برای وسط‌چین شدن
-const HotSteamAnimation = () => (
-  <motion.svg
-    className="absolute -top-28 left-1/2 -translate-x-1/2 w-24 h-24 opacity-50"
-    viewBox="0 0 100 100" // اضافه شدن viewBox برای کنترل بهتر
-    animate={{ y: [0, -20, 0], opacity: [0.5, 0.1, 0.5], scale: [1, 1.1, 1] }}
-    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-  >
-    <path d="M30 80 Q 40 50 50 80 T 70 80" stroke="#FFFFFF" fill="none" strokeWidth="2" />
-    <path d="M40 70 Q 50 40 60 70 T 80 70" stroke="#E0E0E0" fill="none" strokeWidth="1.5" />
-  </motion.svg>
-);
+// انیمیشن بخار نهایی با حس گرما
+const HotSteamAnimation = () => {
+  const particles = Array.from({ length: 20 }).map((_, i) => ({
+    id: i,
+    initialX: Math.random() * 50 - 25,
+    duration: 4 + Math.random() * 4,
+    delay: Math.random() * 5,
+    sway: Math.random() * 30 - 15,
+  }));
 
-// کامپوننت انیمیشن سرما با موقعیت‌های اصلاح‌شده برای وسط‌چین شدن
+  return (
+    <motion.svg
+      className="absolute -top-40 left-1/2 -translate-x-1/2 w-52 h-40"
+      viewBox="0 0 120 100"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      {/* تعریف فیلتر برای ایجاد اعوجاج گرمایی */}
+      <defs>
+        <filter id="heatDistortion">
+          {/* ایجاد نویز برای اعوجاج */}
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.03 0.1"
+            numOctaves="2"
+            result="turbulence"
+          />
+          {/* اعمال اعوجاج بر اساس نویز */}
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="turbulence"
+            scale="6"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+          {/* کمی محو کردن برای نرمی بیشتر */}
+          <feGaussianBlur stdDeviation="0.5" />
+        </filter>
+      </defs>
+
+      {/* گروهی از ذرات بخار که فیلتر روی آن‌ها اعمال می‌شود */}
+      <motion.g style={{ filter: 'url(#heatDistortion)' }}>
+        {particles.map(p => (
+          <motion.circle
+            key={p.id}
+            cx={60 + p.initialX}
+            cy={110}
+            r={2 + Math.random() * 3}
+            fill="rgba(255, 248, 231, 0.6)" // رنگ گرم‌تر برای بخار
+            initial={{ y: 0, opacity: 0 }}
+            animate={{
+              y: -120,
+              x: [0, p.sway, 0],
+              scale: [0.5, 1.5, 1],
+              opacity: [0, 1, 0.5, 0],
+            }}
+            transition={{
+              duration: p.duration,
+              delay: p.delay,
+              repeat: Infinity,
+              ease: "easeOut", // شروع سریع و پایان آرام
+            }}
+          />
+        ))}
+      </motion.g>
+    </motion.svg>
+  );
+};
+
+
+// (کامپوننت ColdEffectAnimation بدون تغییر)
 const ColdEffectAnimation = () => {
   const particles = [
     { x: 20, y: 35, delay: 0, scale: 0.8 },
@@ -87,7 +145,7 @@ const ColdEffectAnimation = () => {
   );
 };
 
-// کامپوننت اصلی
+// (کامپوننت اصلی DrinkDetails بدون تغییر در منطق اصلی)
 function DrinkDetails({ drink }) {
   const ingredients = drink ? Object.entries(drink.ingredients) : [];
   const maxGram = drink ? Math.max(...Object.values(drink.ingredients).filter(val => val > 0), 1) : 1;
@@ -142,11 +200,12 @@ function DrinkDetails({ drink }) {
                 <motion.div
                   className="relative w-48 h-40 bg-white rounded-t-xl rounded-b-3xl shadow-lg"
                   animate={{
-                    y: [0, -4, 0],
-                    rotate: [0, 1, -1, 0],
+                    y: [0, -6, 0, 6, 0],
+                    rotate: [0, 1.5, -1.5, 1.5, 0],
+                    x: [0, 2, -2, 2, 0],
                   }}
                   transition={{
-                    duration: 4,
+                    duration: 8,
                     repeat: Infinity,
                     ease: 'easeInOut',
                   }}
