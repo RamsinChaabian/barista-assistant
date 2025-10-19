@@ -89,7 +89,7 @@ function BrewingGuide({ drink }) {
         })}
       </div>
        <p className="text-warm-light mt-4 text-center text-xs opacity-80">
-        نمایش بصری نسبت مواد
+        نمایش ترکیب مواد
       </p>
     </div>
   );
