@@ -1,3 +1,5 @@
+// src/App.jsx
+
 import { useState } from 'react';
 import Header from './components/Header';
 import DrinkDetails from './components/DrinkDetails';
@@ -27,9 +29,10 @@ function App() {
   return (
     <div 
       className="min-h-screen font-vazir text-coffee-brown overflow-hidden relative bg-cover bg-center flex flex-col"
-      style={{ backgroundImage: "url('/background.jpg')" }}
+      style={{ backgroundImage: "url('background.jpg')" }}
     >
-      <div className="absolute inset-0 bg-black/50 z-0" />
+      {/* ✨ تغییر در این خط */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0" />
       
       <main className="relative z-10 container mx-auto p-4 md:p-8 flex-grow">
         <Header 
