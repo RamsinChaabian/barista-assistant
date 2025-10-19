@@ -24,9 +24,6 @@ function CategorySelector({ activeCategory, onCategoryChange }) {
 function Header({ menu, onSelectDrink, selectedDrinkId, activeCategory, onCategoryChange }) {
   return (
     <header className="text-center mb-12">
-      <h1 className="text-6xl md:text-8xl font-bold text-white drop-shadow-lg mb-4">
-        کافه طبیب
-      </h1>
       <p className="text-xl text-warm-light mb-8 drop-shadow">نوشیدنی رویایی خود را انتخاب کنید</p>
       
       {/* اضافه کردن کامپوننت انتخاب دسته */}
