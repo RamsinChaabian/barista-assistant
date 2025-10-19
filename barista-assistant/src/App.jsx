@@ -7,45 +7,39 @@ import Footer from './components/Footer';
 import menuData from './data/menu.json';
 
 function App() {
-  const [activeCategory, setActiveCategory] = useState('گرم');
-  
-  // پیدا کردن اولین نوشیدنی از دسته فعال برای نمایش اولیه
-  const [selectedDrink, setSelectedDrink] = useState(menuData.find(d => d.category === activeCategory));
+  // اولین نوشیدنی گرم به عنوان پیش‌فرض انتخاب می‌شود
+  const [selectedDrink, setSelectedDrink] = useState(menuData.find(d => d.category === 'گرم'));
 
-  // فیلتر کردن منو بر اساس دسته فعال
-  const filteredMenu = menuData.filter(drink => drink.category === activeCategory);
+  // جدا کردن منوها بر اساس دسته‌بندی
+  const hotDrinks = menuData.filter(drink => drink.category === 'گرم');
+  const coldDrinks = menuData.filter(drink => drink.category === 'سرد');
 
   const handleSelectDrink = (drink) => {
     setSelectedDrink(drink);
   };
 
-  const handleCategoryChange = (category) => {
-    setActiveCategory(category);
-    // با تغییر دسته، اولین نوشیدنی از دسته جدید را انتخاب کن
-    const firstDrinkOfCategory = menuData.find(d => d.category === category);
-    setSelectedDrink(firstDrinkOfCategory);
-  };
-
   return (
     <div 
-      className="min-h-screen font-vazir text-coffee-brown overflow-hidden relative bg-cover bg-center flex flex-col"
+      className="min-h-screen font-vazir text-coffee-brown overflow-x-hidden relative bg-cover bg-center flex flex-col"
       style={{ backgroundImage: "url('background.jpg')" }}
     >
-      {/* ✨ تغییر در این خط */}
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0" />
       
-      <main className="relative z-10 container mx-auto p-4 md:p-8 flex-grow">
-        <Header 
-          menu={filteredMenu} 
-          onSelectDrink={handleSelectDrink} 
-          selectedDrinkId={selectedDrink?.id}
-          activeCategory={activeCategory}
-          onCategoryChange={handleCategoryChange} 
-        />
+      <main className="relative z-10 w-full flex-grow grid grid-cols-1 md:grid-cols-12 md:gap-x-4 items-start py-4 md:py-8 px-4 md:pl-8 md:pr-4">
         
-        <div className="relative min-h-[auto] md:min-h-[550px] mt-16">
-          <DrinkDetails drink={selectedDrink} />
+        <div className="md:col-span-2">
+            <Header 
+              hotDrinks={hotDrinks}
+              coldDrinks={coldDrinks}
+              onSelectDrink={handleSelectDrink} 
+              selectedDrinkId={selectedDrink?.id}
+            />
         </div>
+
+        <div className="md:col-span-10 h-full">
+            <DrinkDetails drink={selectedDrink} />
+        </div>
+
       </main>
 
       <Footer />
