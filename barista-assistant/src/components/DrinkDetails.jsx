@@ -6,7 +6,7 @@ import BrewingGuide from './BrewingGuide';
 // (کامپوننت IngredientBar بدون تغییر باقی می‌ماند)
 const IngredientBar = ({ name, gram, color, maxGram }) => {
   const percentage = maxGram > 0 ? (gram / maxGram) * 100 : 0;
-  
+
   const getIngredientName = (name) => {
     const names = {
       coffee: 'قهوه', milk: 'شیر', water: 'آب', chocolate: 'شکلات',
@@ -16,7 +16,7 @@ const IngredientBar = ({ name, gram, color, maxGram }) => {
     };
     return names[name] || name;
   };
-  
+
   return (
     <div className="w-full mb-4">
       <div className="flex justify-between items-center mb-1 text-warm-light font-semibold">
@@ -36,7 +36,7 @@ const IngredientBar = ({ name, gram, color, maxGram }) => {
   );
 };
 
-// انیمیشن بخار نهایی با حس گرما
+// (انیمیشن بخار گرم بدون تغییر)
 const HotSteamAnimation = () => {
   const particles = Array.from({ length: 20 }).map((_, i) => ({
     id: i,
@@ -54,17 +54,14 @@ const HotSteamAnimation = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      {/* تعریف فیلتر برای ایجاد اعوجاج گرمایی */}
       <defs>
         <filter id="heatDistortion">
-          {/* ایجاد نویز برای اعوجاج */}
           <feTurbulence
             type="fractalNoise"
             baseFrequency="0.03 0.1"
             numOctaves="2"
             result="turbulence"
           />
-          {/* اعمال اعوجاج بر اساس نویز */}
           <feDisplacementMap
             in="SourceGraphic"
             in2="turbulence"
@@ -72,12 +69,10 @@ const HotSteamAnimation = () => {
             xChannelSelector="R"
             yChannelSelector="G"
           />
-          {/* کمی محو کردن برای نرمی بیشتر */}
           <feGaussianBlur stdDeviation="0.5" />
         </filter>
       </defs>
 
-      {/* گروهی از ذرات بخار که فیلتر روی آن‌ها اعمال می‌شود */}
       <motion.g style={{ filter: 'url(#heatDistortion)' }}>
         {particles.map(p => (
           <motion.circle
@@ -85,7 +80,7 @@ const HotSteamAnimation = () => {
             cx={60 + p.initialX}
             cy={110}
             r={2 + Math.random() * 3}
-            fill="rgba(255, 248, 231, 0.6)" // رنگ گرم‌تر برای بخار
+            fill="rgba(255, 248, 231, 0.6)"
             initial={{ y: 0, opacity: 0 }}
             animate={{
               y: -120,
@@ -97,7 +92,7 @@ const HotSteamAnimation = () => {
               duration: p.duration,
               delay: p.delay,
               repeat: Infinity,
-              ease: "easeOut", // شروع سریع و پایان آرام
+              ease: "easeOut",
             }}
           />
         ))}
@@ -106,44 +101,66 @@ const HotSteamAnimation = () => {
   );
 };
 
-
-// (کامپوننت ColdEffectAnimation بدون تغییر)
+// انیمیشن سرما با عرض کمتر و متمرکزتر
 const ColdEffectAnimation = () => {
-  const particles = [
-    { x: 20, y: 35, delay: 0, scale: 0.8 },
-    { x: 40, y: 15, delay: 0.8, scale: 1 },
-    { x: 60, y: 40, delay: 1.5, scale: 0.9 },
-    { x: 80, y: 20, delay: 2.2, scale: 1.1 },
+  const fogPaths = [
+    {
+      d: "M 5,20 Q 20,-10 30,20 T 55,20",
+      duration: 8,
+      delay: 0,
+    },
+    {
+      d: "M 0,25 Q 25,0 35,25 T 60,25",
+      duration: 10,
+      delay: 2,
+    },
+    {
+      d: "M 10,15 Q 30,-15 40,15 T 50,15",
+      duration: 9,
+      delay: 4,
+    }
   ];
 
   return (
     <motion.svg
-      className="absolute -top-24 left-1/2 -translate-x-1/2 w-40 h-24 opacity-70"
-      viewBox="0 0 100 50"
+      className="absolute -top-24 left-1/2 -translate-x-1/2 w-32 h-24" // عرض کمتر شد
+      viewBox="0 0 60 50" // viewBox متناسب با عرض جدید
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 0.6 }}
+      transition={{ duration: 1 }}
     >
-      {particles.map((p, i) => (
-        <motion.path
-          key={i}
-          d="M10 10 L12 6 L14 10 L18 12 L14 14 L12 18 L10 14 L6 12 L10 10 Z"
-          fill="#FFFFFF"
-          initial={{ x: p.x, y: p.y, scale: p.scale }}
-          animate={{
-            y: [p.y, p.y - 15, p.y],
-            x: [p.x, p.x + 8, p.x - 8, p.x],
-            opacity: [0.8, 0.2, 0.8],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 4 + Math.random() * 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: p.delay,
-          }}
-        />
-      ))}
+      <defs>
+        <filter id="coldFog">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+        </filter>
+      </defs>
+      <g style={{ filter: 'url(#coldFog)' }}>
+        {fogPaths.map((path, i) => (
+          <motion.path
+            key={i}
+            d={path.d}
+            stroke="white"
+            strokeWidth="4"
+            fill="none"
+            initial={{ y: 15, x: 0, opacity: 0 }}
+            animate={{
+              y: -25,
+              opacity: [0, 1, 1, 0],
+              x: [0, 5, -5, 0],
+            }}
+            transition={{
+              duration: path.duration,
+              delay: path.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </g>
     </motion.svg>
   );
 };
+
 
 // (کامپوننت اصلی DrinkDetails بدون تغییر در منطق اصلی)
 function DrinkDetails({ drink }) {
@@ -169,7 +186,7 @@ function DrinkDetails({ drink }) {
           transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0 items-center h-full flex-grow">
-            
+
             <div className="text-start h-full flex flex-col justify-center order-2 md:order-1 md:col-span-1">
               <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-white">{drink.name}</h2>
               <p className="text-warm-light leading-relaxed mb-6 text-sm lg:text-base">{drink.description}</p>
@@ -212,7 +229,7 @@ function DrinkDetails({ drink }) {
                 >
                   {drink.category === 'گرم' && <HotSteamAnimation />}
                   {drink.category === 'سرد' && <ColdEffectAnimation />}
-                  
+
                   <motion.div
                     className="absolute bottom-0 left-0 right-0 rounded-b-3xl"
                     style={{
