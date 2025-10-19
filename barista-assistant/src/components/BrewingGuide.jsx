@@ -62,7 +62,7 @@ function BrewingGuide({ drink }) {
     <div className="flex flex-col items-center justify-center h-full">
       <h3 className="text-2xl font-bold text-white mb-4 drop-shadow">راهنمای ترکیب</h3>
       
-      <div className="relative w-40 h-56 border-8 border-gray-300 rounded-b-full rounded-t-xl bg-white/10 shadow-lg flex flex-col-reverse overflow-hidden">
+      <div className="relative w-60 h-80 border-8 border-gray-300 rounded-b-full rounded-t-xl bg-white/10 shadow-lg flex flex-col-reverse overflow-hidden">
         {ingredients.map(([name, gram], index) => {
           const heightPercentage = (gram / totalGram) * 100;
           const backgroundColor = ingredientColors[name];
