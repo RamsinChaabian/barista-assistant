@@ -1,18 +1,25 @@
-// src/components/BrewingGuide.jsx
-
 import { motion } from 'framer-motion';
 
-// رنگ‌های مواد
+// رنگ‌های مواد اولیه جدید اضافه شدند
 const ingredientColors = {
   coffee: '#6F4E37',
   milk: '#F5F5DC',
   water: '#A7D2E8',
-  chocolate: '#4D2B1E'
+  chocolate: '#4D2B1E',
+  ice: '#E0F7FA',
+  ice_cream: '#FFF9C4',
+  chocolate_sauce: '#3E2723',
+  nutella: '#A67B5B',
+  soda: '#F5F5F5',
+  lime: '#8BC34A',
+  mint: '#2E7D32',
+  caramel_sauce: '#BF360C',
+  oreo: '#263238'
 };
 
-// تابعی برای تشخیص رنگ متضاد (سفید یا مشکی)
+// تابع تشخیص رنگ متضاد برای خوانایی بهتر متن روی هر لایه
 const getContrastColor = (hexColor) => {
-  if (!hexColor) return '#FFFFFF';
+  if (!hexColor || hexColor.length < 7) return '#000000';
   const r = parseInt(hexColor.substr(1, 2), 16);
   const g = parseInt(hexColor.substr(3, 2), 16);
   const b = parseInt(hexColor.substr(5, 2), 16);
@@ -29,19 +36,23 @@ function BrewingGuide({ drink }) {
   
   const totalGram = ingredients.reduce((sum, [, gram]) => sum + gram, 0);
 
-  // تابعی برای ترجمه نام مواد
+  // ترجمه‌های جدید برای مواد اولیه
   const getIngredientName = (name) => {
     switch (name) {
-      case 'coffee':
-        return 'قهوه';
-      case 'milk':
-        return 'شیر';
-      case 'water':
-        return 'آب';
-      case 'chocolate':
-        return 'شکلات';
-      default:
-        return name;
+      case 'coffee': return 'قهوه';
+      case 'milk': return 'شیر';
+      case 'water': return 'آب';
+      case 'chocolate': return 'شکلات';
+      case 'ice': return 'یخ';
+      case 'ice_cream': return 'بستنی';
+      case 'chocolate_sauce': return 'سس شکلات';
+      case 'nutella': return 'نوتلا';
+      case 'soda': return 'سودا';
+      case 'lime': return 'لیمو';
+      case 'mint': return 'نعنا';
+      case 'caramel_sauce': return 'سس کارامل';
+      case 'oreo': return 'اورئو';
+      default: return name;
     }
   };
 
@@ -49,7 +60,6 @@ function BrewingGuide({ drink }) {
     <div className="flex flex-col items-center justify-start h-full pt-10">
       <h3 className="text-2xl font-bold text-white mb-4 drop-shadow">راهنمای ترکیب</h3>
       
-      {/* فنجان راهنما */}
       <div className="relative w-40 h-56 border-8 border-gray-300 rounded-b-full rounded-t-xl bg-white/10 shadow-lg flex flex-col-reverse overflow-hidden">
         {ingredients.map(([name, gram], index) => {
           const heightPercentage = (gram / totalGram) * 100;

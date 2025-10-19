@@ -2,50 +2,110 @@
   {
     "id": 2,
     "name": "آمریکانو",
+    "category": "گرم",
     "description": "ترکیبی از یک شات اسپرسو و آب داغ که طعمی ملایم‌تر از اسپرسو دارد.",
     "cupColor": "#5C3A21",
     "ingredients": {
       "coffee": 30,
-      "milk": 0,
-      "water": 120,
-      "chocolate": 0
+      "water": 120
     }
   },
   {
     "id": 3,
     "name": "لاته",
+    "category": "گرم",
     "description": "نوشیدنی محبوبی بر پایه اسپرسو که با شیر بخار داده شده و لایه‌ی نازکی از فوم شیر تهیه می‌شود.",
     "cupColor": "#C8A981",
     "ingredients": {
       "coffee": 60,
-      "milk": 120,
-      "water": 0,
-      "chocolate": 0
+      "milk": 120
     }
   },
   {
     "id": 4,
-    "name": "موکا",
-    "description": "ترکیبی دلپذیر از اسپرسو، شکلات داغ و شیر بخار داده شده که با خامه تزیین می‌شود.",
-    "cupColor": "#6B4F4F",
+    "name": "هات چاکلت",
+    "category": "گرم",
+    "description": "نوشیدنی گرم و آرامش‌بخش، تهیه شده از بهترین شکلات‌ها و شیر داغ.",
+    "cupColor": "#5D4037",
     "ingredients": {
-      "coffee": 60,
-      "milk": 90,
-      "water": 0,
-      "chocolate": 30
+      "milk": 150,
+      "chocolate": 40
     }
   },
   {
     "id": 5,
     "name": "کاپوچینو",
-    "description": "ترکیبی کلاسیک از اسپرسو، شیر بخار داده شده و فوم شیر غلیظ که طعمی قوی و بافتی مخملی دارد.",
+    "category": "گرم",
+    "description": "ترکیبی کلاسیک از اسپرسو، شیر بخار داده شده و فوم شیر غلیظ.",
     "cupColor": "#C8A981",
     "ingredients": {
       "coffee": 60,
-      "milk": 60,
-      "water": 0,
-      "chocolate": 0
+      "milk": 60
+    }
+  },
+  {
+    "id": 8,
+    "name": "شیک شکلات",
+    "category": "سرد",
+    "description": "شیک کلاسیک و غلیظ با طعم بی‌نظیر شکلات، تهیه شده از بستنی وانیلی و سس شکلات.",
+    "cupColor": "#4E342E",
+    "ingredients": {
+      "milk": 120,
+      "ice_cream": 80,
+      "chocolate_sauce": 30,
+      "ice": 50
+    }
+  },
+  {
+    "id": 9,
+    "name": "شیک نوتلا",
+    "category": "سرد",
+    "description": "ترکیبی رویایی از بستنی خامه‌ای و شکلات فندقی نوتلا که هر لحظه را شیرین می‌کند.",
+    "cupColor": "#8B4513",
+    "ingredients": {
+      "milk": 120,
+      "ice_cream": 80,
+      "nutella": 40,
+      "ice": 50
+    }
+  },
+  {
+    "id": 10,
+    "name": "موهیتو",
+    "category": "سرد",
+    "description": "نوشیدنی خنک و نیروبخش بر پایه نعنای تازه، لیموی ترش و سودا.",
+    "cupColor": "#E0F2F1",
+    "ingredients": {
+      "soda": 150,
+      "lime": 30,
+      "mint": 15,
+      "ice": 90
+    }
+  },
+  {
+    "id": 11,
+    "name": "شیک کارامل",
+    "category": "سرد",
+    "description": "طعمی شیرین و کاراملی در ترکیبی از بستنی وانیلی و سس کارامل غلیظ.",
+    "cupColor": "#E6B800",
+    "ingredients": {
+      "milk": 120,
+      "ice_cream": 90,
+      "caramel_sauce": 30,
+      "ice": 50
+    }
+  },
+  {
+    "id": 12,
+    "name": "شیک اورئو",
+    "category": "سرد",
+    "description": "شیک محبوب و خوشمزه با تکه‌های بیسکوییت اورئو، بستنی وانیلی و شیر.",
+    "cupColor": "#E0E0E0",
+    "ingredients": {
+      "milk": 120,
+      "ice_cream": 80,
+      "oreo": 40,
+      "ice": 50
     }
   }
-  
 ]

@@ -5,7 +5,24 @@ import Footer from './components/Footer';
 import menuData from './data/menu.json';
 
 function App() {
-  const [selectedDrink, setSelectedDrink] = useState(menuData[2]);
+  const [activeCategory, setActiveCategory] = useState('گرم');
+  
+  // پیدا کردن اولین نوشیدنی از دسته فعال برای نمایش اولیه
+  const [selectedDrink, setSelectedDrink] = useState(menuData.find(d => d.category === activeCategory));
+
+  // فیلتر کردن منو بر اساس دسته فعال
+  const filteredMenu = menuData.filter(drink => drink.category === activeCategory);
+
+  const handleSelectDrink = (drink) => {
+    setSelectedDrink(drink);
+  };
+
+  const handleCategoryChange = (category) => {
+    setActiveCategory(category);
+    // با تغییر دسته، اولین نوشیدنی از دسته جدید را انتخاب کن
+    const firstDrinkOfCategory = menuData.find(d => d.category === category);
+    setSelectedDrink(firstDrinkOfCategory);
+  };
 
   return (
     <div 
@@ -15,7 +32,13 @@ function App() {
       <div className="absolute inset-0 bg-black/50 z-0" />
       
       <main className="relative z-10 container mx-auto p-4 md:p-8 flex-grow">
-        <Header menu={menuData} onSelectDrink={setSelectedDrink} selectedDrinkId={selectedDrink?.id} />
+        <Header 
+          menu={filteredMenu} 
+          onSelectDrink={handleSelectDrink} 
+          selectedDrinkId={selectedDrink?.id}
+          activeCategory={activeCategory}
+          onCategoryChange={handleCategoryChange} 
+        />
         
         <div className="relative min-h-[auto] md:min-h-[550px] mt-16">
           <DrinkDetails drink={selectedDrink} />
