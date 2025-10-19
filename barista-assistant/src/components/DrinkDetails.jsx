@@ -101,21 +101,21 @@ const HotSteamAnimation = () => {
   );
 };
 
-// انیمیشن سرما با عرض کمتر و متمرکزتر
+// انیمیشن سرما با ابعاد مشابه انیمیشن گرما
 const ColdEffectAnimation = () => {
   const fogPaths = [
     {
-      d: "M 5,20 Q 20,-10 30,20 T 55,20",
+      d: "M 10,100 Q 40,60 70,100 T 110,100",
       duration: 8,
       delay: 0,
     },
     {
-      d: "M 0,25 Q 25,0 35,25 T 60,25",
+      d: "M 15,105 Q 50,70 80,105 T 125,105",
       duration: 10,
       delay: 2,
     },
     {
-      d: "M 10,15 Q 30,-15 40,15 T 50,15",
+      d: "M 20,95 Q 60,55 90,95 T 100,95",
       duration: 9,
       delay: 4,
     }
@@ -123,15 +123,15 @@ const ColdEffectAnimation = () => {
 
   return (
     <motion.svg
-      className="absolute -top-24 left-1/2 -translate-x-1/2 w-32 h-24" // عرض کمتر شد
-      viewBox="0 0 60 50" // viewBox متناسب با عرض جدید
+      className="absolute -top-40 left-1/2 -translate-x-1/2 w-52 h-40" // ابعاد مشابه گرما
+      viewBox="0 0 120 100" // viewBox مشابه گرما
       initial={{ opacity: 0 }}
       animate={{ opacity: 0.6 }}
       transition={{ duration: 1 }}
     >
       <defs>
         <filter id="coldFog">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" />
         </filter>
       </defs>
       <g style={{ filter: 'url(#coldFog)' }}>
@@ -140,13 +140,13 @@ const ColdEffectAnimation = () => {
             key={i}
             d={path.d}
             stroke="white"
-            strokeWidth="4"
+            strokeWidth="5"
             fill="none"
-            initial={{ y: 15, x: 0, opacity: 0 }}
+            initial={{ y: 0, x: 0, opacity: 0 }}
             animate={{
-              y: -25,
+              y: -100, // حرکت به سمت بالا
               opacity: [0, 1, 1, 0],
-              x: [0, 5, -5, 0],
+              x: [0, 10, -10, 0], // حرکت آرام افقی
             }}
             transition={{
               duration: path.duration,
