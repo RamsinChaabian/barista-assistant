@@ -215,7 +215,7 @@ function DrinkDetails({ drink }) {
                 transition={{ delay: 0.2, type: 'spring', stiffness: 100 }}
               >
                 <motion.div
-                  className="relative w-48 h-40 bg-white rounded-t-xl rounded-b-3xl shadow-lg"
+                  className="relative w-60 h-52 bg-white rounded-t-xl rounded-b-3xl shadow-lg"
                   animate={{
                     y: [0, -6, 0, 6, 0],
                     rotate: [0, 1.5, -1.5, 1.5, 0],
@@ -255,7 +255,7 @@ function DrinkDetails({ drink }) {
                     />
                   </motion.svg>
                 </motion.div>
-                <div className="absolute -bottom-2 -left-6 w-60 h-6 bg-white rounded-full shadow-inner" />
+                <div className="absolute -bottom-2 -left-6 w-72 h-6 bg-white rounded-full shadow-inner" />
               </motion.div>
             </div>
 
