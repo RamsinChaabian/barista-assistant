@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import BrewingGuide from './BrewingGuide';
 
-// (کامپوننت IngredientBar بدون تغییر باقی می‌ماند)
+// (کامپوننت IngredientBar به‌روزرسانی شد)
 const IngredientBar = ({ name, gram, color, maxGram }) => {
   const percentage = maxGram > 0 ? (gram / maxGram) * 100 : 0;
 
@@ -12,7 +12,11 @@ const IngredientBar = ({ name, gram, color, maxGram }) => {
       coffee: 'قهوه', milk: 'شیر', water: 'آب', chocolate: 'شکلات',
       ice: 'یخ', ice_cream: 'بستنی', chocolate_sauce: 'سس شکلات',
       nutella: 'نوتلا', soda: 'سودا', lime: 'لیمو', mint: 'نعنا',
-      caramel_sauce: 'سس کارامل', oreo: 'اورئو'
+      caramel_sauce: 'سس کارامل', oreo: 'اورئو',
+      baharnarenj_syrup: 'شربت بهارنارنج', galaxy_syrup: 'شربت کهکشانی',
+      lemon_syrup: 'شربت آبلیمو', cucumber_syrup: 'شربت خیار سکنجبین',
+      mint_syrup: 'شربت نعنا', nastaran_syrup: 'شربت نسترن',
+      saffron_syrup: 'شربت زعفران', rosewater_syrup: 'شربت گلاب'
     };
     return names[name] || name;
   };
@@ -162,7 +166,7 @@ const ColdEffectAnimation = () => {
 };
 
 
-// (کامپوننت اصلی DrinkDetails بدون تغییر در منطق اصلی)
+// (کامپوننت اصلی DrinkDetails به‌روزرسانی شد)
 function DrinkDetails({ drink }) {
   const ingredients = drink ? Object.entries(drink.ingredients) : [];
   const maxGram = drink ? Math.max(...Object.values(drink.ingredients).filter(val => val > 0), 1) : 1;
@@ -171,7 +175,10 @@ function DrinkDetails({ drink }) {
     coffee: '#6F4E37', milk: '#F5F5DC', water: '#A7D2E8', chocolate: '#4D2B1E',
     ice: '#E0F7FA', ice_cream: '#FFF9C4', chocolate_sauce: '#3E2723',
     nutella: '#A67B5B', soda: '#F5F5F5', lime: '#8BC34A', mint: '#2E7D32',
-    caramel_sauce: '#BF360C', oreo: '#263238'
+    caramel_sauce: '#BF360C', oreo: '#263238', baharnarenj_syrup: '#FFDAB9',
+    galaxy_syrup: '#B28DFF', lemon_syrup: '#FFFACD', cucumber_syrup: '#C8E6C9',
+    mint_syrup: '#A7FFEB', nastaran_syrup: '#FFCDD2', saffron_syrup: '#FFECB3',
+    rosewater_syrup: '#F8BBD0'
   };
 
   return (
@@ -228,7 +235,7 @@ function DrinkDetails({ drink }) {
                   }}
                 >
                   {drink.category === 'گرم' && <HotSteamAnimation />}
-                  {drink.category === 'سرد' && <ColdEffectAnimation />}
+                  {(drink.category === 'سرد' || drink.category === 'شربت') && <ColdEffectAnimation />}
 
                   <motion.div
                     className="absolute bottom-0 left-0 right-0 rounded-b-3xl"

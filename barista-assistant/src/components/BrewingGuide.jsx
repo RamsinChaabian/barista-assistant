@@ -16,7 +16,15 @@ const ingredientColors = {
   lime: '#8BC34A',
   mint: '#2E7D32',
   caramel_sauce: '#BF360C',
-  oreo: '#263238'
+  oreo: '#263238',
+  baharnarenj_syrup: '#FFDAB9',
+  galaxy_syrup: '#B28DFF',
+  lemon_syrup: '#FFFACD',
+  cucumber_syrup: '#C8E6C9',
+  mint_syrup: '#A7FFEB',
+  nastaran_syrup: '#FFCDD2',
+  saffron_syrup: '#FFECB3',
+  rosewater_syrup: '#F8BBD0'
 };
 
 // تابع تشخیص رنگ متضاد برای خوانایی بهتر متن روی هر لایه
@@ -54,6 +62,14 @@ function BrewingGuide({ drink }) {
       case 'mint': return 'نعنا';
       case 'caramel_sauce': return 'سس کارامل';
       case 'oreo': return 'اورئو';
+      case 'baharnarenj_syrup': return 'شربت بهارنارنج';
+      case 'galaxy_syrup': return 'شربت کهکشانی';
+      case 'lemon_syrup': return 'شربت آبلیمو';
+      case 'cucumber_syrup': return 'شربت خیار سکنجبین';
+      case 'mint_syrup': return 'شربت نعنا';
+      case 'nastaran_syrup': return 'شربت نسترن';
+      case 'saffron_syrup': return 'شربت زعفران';
+      case 'rosewater_syrup': return 'شربت گلاب';
       default: return name;
     }
   };

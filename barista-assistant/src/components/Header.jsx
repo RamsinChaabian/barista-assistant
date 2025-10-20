@@ -1,42 +1,30 @@
 // src/components/Header.jsx
 
-import DrinkMenu from './DrinkMenu';
+import AccordionItem from './AccordionItem';
 
-function Header({ hotDrinks, coldDrinks, onSelectDrink, selectedDrinkId }) {
+function Header({ hotDrinks, coldDrinks, syrupDrinks, onSelectDrink, selectedDrinkId, openCategory, setOpenCategory }) {
+  const categories = [
+    { title: '🔥 نوشیدنی‌های گرم', menu: hotDrinks, key: 'hot' },
+    { title: '❄️ نوشیدنی‌های سرد', menu: coldDrinks, key: 'cold' },
+    { title: '🍹 شربت‌ها', menu: syrupDrinks, key: 'syrup' },
+  ];
+
   return (
     <header className="text-right">
       <p className="text-lg text-warm-light mb-5 drop-shadow">نوشیدنی خود را انتخاب کنید</p>
       
       <div className="flex flex-col gap-4">
-        
-        {/* دسته گرم */}
-        <div>
-          <h3 className="w-full px-4 py-2.5 rounded-lg text-lg font-bold bg-black/20 text-white">
-            🔥 نوشیدنی‌های گرم
-          </h3>
-          <div className="mt-2">
-            <DrinkMenu 
-              menu={hotDrinks} 
-              onSelectDrink={onSelectDrink} 
-              selectedDrinkId={selectedDrinkId} 
-            />
-          </div>
-        </div>
-
-        {/* دسته سرد */}
-        <div>
-          <h3 className="w-full px-4 py-2.5 rounded-lg text-lg font-bold bg-black/20 text-white">
-            ❄️ نوشیدنی‌های سرد
-          </h3>
-          <div className="mt-2">
-            <DrinkMenu 
-              menu={coldDrinks} 
-              onSelectDrink={onSelectDrink} 
-              selectedDrinkId={selectedDrinkId} 
-            />
-          </div>
-        </div>
-
+        {categories.map(category => (
+          <AccordionItem
+            key={category.key}
+            title={category.title}
+            menu={category.menu}
+            isOpen={openCategory === category.key}
+            onToggle={() => setOpenCategory(openCategory === category.key ? null : category.key)}
+            onSelectDrink={onSelectDrink}
+            selectedDrinkId={selectedDrinkId}
+          />
+        ))}
       </div>
     </header>
   );

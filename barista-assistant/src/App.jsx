@@ -7,12 +7,13 @@ import Footer from './components/Footer';
 import menuData from './data/menu.json';
 
 function App() {
-  // اولین نوشیدنی گرم به عنوان پیش‌فرض انتخاب می‌شود
   const [selectedDrink, setSelectedDrink] = useState(menuData.find(d => d.category === 'گرم'));
+  const [openCategory, setOpenCategory] = useState('hot'); // 'hot' به صورت پیش‌فرض باز است
 
   // جدا کردن منوها بر اساس دسته‌بندی
   const hotDrinks = menuData.filter(drink => drink.category === 'گرم');
   const coldDrinks = menuData.filter(drink => drink.category === 'سرد');
+  const syrupDrinks = menuData.filter(drink => drink.category === 'شربت');
 
   const handleSelectDrink = (drink) => {
     setSelectedDrink(drink);
@@ -31,12 +32,15 @@ function App() {
             <Header 
               hotDrinks={hotDrinks}
               coldDrinks={coldDrinks}
+              syrupDrinks={syrupDrinks}
               onSelectDrink={handleSelectDrink} 
               selectedDrinkId={selectedDrink?.id}
+              openCategory={openCategory}
+              setOpenCategory={setOpenCategory}
             />
         </div>
 
-        <div className="md:col-span-10 h-full">
+        <div className="md:col-span-10 h-full mt-4 md:mt-0">
             <DrinkDetails drink={selectedDrink} />
         </div>
 

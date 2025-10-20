@@ -107,5 +107,101 @@
       "oreo": 40,
       "ice": 50
     }
+  },
+  {
+    "id": 13,
+    "name": "شربت بهارنارنج",
+    "category": "شربت",
+    "description": "شربتی گوارا و معطر با عطر دل‌انگیز بهارنارنج.",
+    "cupColor": "#FFDAB9",
+    "ingredients": {
+      "water": 150,
+      "baharnarenj_syrup": 40,
+      "ice": 60
+    }
+  },
+  {
+    "id": 14,
+    "name": "شربت کهکشانی",
+    "category": "شربت",
+    "description": "شربتی با رنگ‌های خیره‌کننده و طعمی جادویی.",
+    "cupColor": "#B28DFF",
+    "ingredients": {
+      "water": 150,
+      "galaxy_syrup": 50,
+      "ice": 60
+    }
+  },
+  {
+    "id": 15,
+    "name": "شربت آبلیمو",
+    "category": "شربت",
+    "description": "شربتی کلاسیک و خنک‌کننده با طعم ترش و شیرین لیمو.",
+    "cupColor": "#FFFACD",
+    "ingredients": {
+      "water": 150,
+      "lemon_syrup": 45,
+      "ice": 60
+    }
+  },
+  {
+    "id": 16,
+    "name": "شربت خیار سکنجبین",
+    "category": "شربت",
+    "description": "ترکیبی سنتی و گوارا از خیار و سکنجبین.",
+    "cupColor": "#C8E6C9",
+    "ingredients": {
+      "water": 150,
+      "cucumber_syrup": 50,
+      "ice": 60
+    }
+  },
+  {
+    "id": 17,
+    "name": "شربت نعنا",
+    "category": "شربت",
+    "description": "شربتی خنک و باطراوت با عطر و طعم دلپذیر نعنا.",
+    "cupColor": "#A7FFEB",
+    "ingredients": {
+      "water": 150,
+      "mint_syrup": 40,
+      "ice": 60
+    }
+  },
+  {
+    "id": 18,
+    "name": "شربت نسترن",
+    "category": "شربت",
+    "description": "شربتی خوش‌عطر و با خواص آرامش‌بخش گل نسترن.",
+    "cupColor": "#FFCDD2",
+    "ingredients": {
+      "water": 150,
+      "nastaran_syrup": 40,
+      "ice": 60
+    }
+  },
+  {
+    "id": 19,
+    "name": "شربت زعفران",
+    "category": "شربت",
+    "description": "شربتی اصیل و خوش‌رنگ با عطر و طعم بی‌نظیر زعفران.",
+    "cupColor": "#FFECB3",
+    "ingredients": {
+      "water": 150,
+      "saffron_syrup": 30,
+      "ice": 60
+    }
+  },
+  {
+    "id": 20,
+    "name": "شربت گلاب",
+    "category": "شربت",
+    "description": "شربتی سنتی و معطر با عطر آرامش‌بخش گلاب.",
+    "cupColor": "#F8BBD0",
+    "ingredients": {
+      "water": 150,
+      "rosewater_syrup": 35,
+      "ice": 60
+    }
   }
 ]
