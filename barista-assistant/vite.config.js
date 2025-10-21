@@ -6,6 +6,6 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // این خط را اضافه کنید
-  base: '/', 
+  // این خط را اصلاح کنید
+  base: '/barista-assistant/', 
 })
